@@ -1,0 +1,23 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/renderer",
+    "types": [],
+    "paths": {
+      "~modules/*": ["renderer/app/modules/*"]
+    }
+  },
+  "files": [
+    "renderer/main.ts",
+    "renderer/polyfills.ts"
+  ],
+  "include": [
+    "renderer/**/*.ts"
+  ],
+  "exclude": [
+    "renderer/test.ts",
+    "renderer/**/*.spec.ts",
+    "main"
+  ]
+}
