@@ -4,10 +4,9 @@
     "module": "commonjs",
     "target": "es2017",
     "outDir": "./dist/main",
-    "types": [],
-    "paths": {
-      
-    }
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "types": []
   },
   "files": [
     "main/index.ts"

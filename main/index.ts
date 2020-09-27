@@ -5,7 +5,7 @@ import * as path from 'path';
 import * as url from 'url';
 
 //ipc imports
-import {testController} from './controllers/test.controller';
+import {inChargeController} from './controllers/in-charge.controller';
 
 // detect serve mode
 const args = process.argv.slice(1);
@@ -20,7 +20,7 @@ try {
         createWindow(win)
         
         //ipc calls;
-        testController();
+        inChargeController();
     });
 
     app.on('window-all-closed', () => {
