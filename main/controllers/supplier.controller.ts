@@ -32,7 +32,6 @@ export function supplierController(){
 
 	ipcMain.on('request:create-supplier', async (event, supplierData: SupplierData)=>{
 		const supplier = supplierRepository.create(supplierData);
-		await supplierRepository.save(supplier);
 		event.sender.send(
 			'create-supplier', 
 			await supplierRepository.save(supplier)

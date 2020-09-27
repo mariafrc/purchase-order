@@ -26,7 +26,6 @@ export function inChargeController(){
 
 	ipcMain.on('request:create-incharge', async (event, inChargeData: InChargeData)=>{
 		const inCharge = inChargeRepository.create(inChargeData);
-		await inChargeRepository.save(inCharge);
 		event.sender.send(
 			'create-incharge', 
 			await inChargeRepository.save(inCharge)
