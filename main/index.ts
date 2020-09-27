@@ -8,6 +8,7 @@ import * as url from 'url';
 import {inChargeController} from './controllers/in-charge.controller';
 import {supplierController} from './controllers/supplier.controller';
 import {articleController} from './controllers/article.controller';
+import {orderFormController} from './controllers/order-form.controller';
 
 // detect serve mode
 const args = process.argv.slice(1);
@@ -25,6 +26,7 @@ try {
         inChargeController();
         supplierController();
         articleController();
+        orderFormController();
     });
 
     app.on('window-all-closed', () => {
