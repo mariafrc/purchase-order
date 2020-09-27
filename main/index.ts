@@ -6,6 +6,7 @@ import * as url from 'url';
 
 //ipc imports
 import {inChargeController} from './controllers/in-charge.controller';
+import {supplierController} from './controllers/supplier.controller';
 
 // detect serve mode
 const args = process.argv.slice(1);
@@ -21,6 +22,7 @@ try {
         
         //ipc calls;
         inChargeController();
+        supplierController();
     });
 
     app.on('window-all-closed', () => {
