@@ -5,7 +5,8 @@
     "outDir": "./out-tsc/renderer",
     "types": [],
     "paths": {
-      "~modules/*": ["renderer/app/modules/*"]
+      "~components/*": ["renderer/app/components/*"],
+      "~services/*": ["renderer/app/services/*"]
     }
   },
   "files": [

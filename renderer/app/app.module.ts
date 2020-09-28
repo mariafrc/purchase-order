@@ -8,15 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 
-//modules
-import { PrimengModule } from '~modules/primeng/primeng.module';
+//primeng imports
+import { PrimengModule } from './primeng/primeng.module';
 
 //components
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

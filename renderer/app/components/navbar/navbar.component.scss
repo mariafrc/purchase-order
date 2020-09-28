@@ -1,0 +1,44 @@
+nav{
+	overflow: auto;
+	background: var(--surface-e);
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	width: 100%;
+	height: 100%;
+	.banner{
+		background: var(--primary-color);
+		margin-top: 0px;
+		padding: 5px;
+		text-align: center;
+		color: var(--surface-e);
+	}
+	.links{
+		a{
+			display: block;
+			padding: 10px;
+			margin-bottom: 5px;
+			&:hover{
+				text-decoration: none;
+				background: var(--primary-color);
+				color: var(--surface-e);
+			}
+		}
+		a.active{
+			background: var(--primary-color);
+			color: var(--surface-e);
+		}
+	}
+	@media (screen and max-width: 768px){
+		height: auto;
+		.banner{
+			margin-bottom: 3px;
+		}
+		.links{
+			display: flex;
+			margin-left: 10px;
+			flex-wrap: wrap;
+			a{
+				border-radius: 3px;
+			}
+		}
+	}
+}
