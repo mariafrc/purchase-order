@@ -1,0 +1,18 @@
+.supplier-item{
+	background: var(--surface-e);
+	color: var(--text-color);
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	padding: 20px;
+	p{
+		margin: 0px;
+		font-size: 14px;
+		padding: 3px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.supplier-header{
+		display: flex;
+		align-items: center;
+		.supplier-title{flex-grow: 1;}
+	}
+}

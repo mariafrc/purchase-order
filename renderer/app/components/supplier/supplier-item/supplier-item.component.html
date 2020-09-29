@@ -1,0 +1,54 @@
+<p-confirmDialog></p-confirmDialog>
+<div class="p-mt-3 supplier-item">
+	<div class="supplier-header">
+		<h4 class="p-m-0 supplier-title">{{ supplier.name }}</h4>
+		<div class="supplier-buttons">
+			<button 
+				pButton 
+				icon="pi pi-list" 
+				class="p-ml-1" 
+				pTooltip="Articles" 
+				tooltipPosition="bottom"
+			></button>
+			<button 
+				pButton 
+				icon="pi pi-pencil" 
+				class="p-ml-1"
+				pTooltip="Modifier" 
+				tooltipPosition="bottom"
+				(click)="onEdit()"
+			></button>
+			<button 
+				pButton 
+				icon="pi pi-times-circle" 
+				class="p-button-danger p-ml-1"
+				pTooltip="Supprimer" 
+				tooltipPosition="bottom"
+				(click)="onDelete(supplier.id)"
+			></button>
+		</div>
+	</div>
+	<hr>
+	<h5 class="p-mb-0">Information fournisseur</h5>
+	<div>
+		<p><span>NIF:</span> <span>{{ supplier.nif }}</span></p>
+		<p><span>STAT:</span> <span>{{ supplier.stat}}</span></p>
+		<p><span>Téléphone:</span> <span>{{supplier.phone}}</span></p>
+	</div>
+	
+	<div>
+		<h5 class="p-mb-1">Information produits</h5>
+		<p>
+			<span>TVA</span>
+			<span>{{ supplier.tva || '20' }}%</span>
+		</p>
+		<p>
+			<span>Expiration après</span>
+			<span>{{ supplier.expiration }} jours</span>
+		</p>
+		<p>
+			<span>Methode de payement</span>
+			<span>Liquide</span>
+		</p>
+	</div>
+</div>

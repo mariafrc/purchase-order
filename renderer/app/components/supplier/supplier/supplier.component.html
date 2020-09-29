@@ -1,0 +1,19 @@
+<div class="container p-pt-4 p-pb-3">	
+	<p-card>
+		<h2 align="center" class="p-m-0">Fournisseurs</h2>
+	</p-card>
+	<button 
+		pButton 
+		label="Nouveau" 
+		icon="pi pi-plus-circle" 
+		iconPos="left" 
+		class="p-mt-2"
+		(click)="onAdd()"
+	></button>
+	<app-supplier-item 
+		*ngFor="let supplier of suppliers" 
+		[supplier]="supplier" 
+		(edited)="onEdited($event)"
+		(deleted)="onDeleted($event)"
+	></app-supplier-item>
+</div>

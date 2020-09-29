@@ -1,0 +1,52 @@
+<div class="p-fluid">
+	<form [formGroup]="supplierForm">
+    <div class="p-field">
+    	<label>Nom *</label>
+      <input type="text" pInputText formControlName="name">
+    </div>
+
+    <div class="p-field">
+    	<label>NIF *</label>
+      <input type="text" pInputText formControlName="nif">
+    </div>
+    
+    <div class="p-field">
+    	<label>STAT *</label>
+      <input type="text" pInputText formControlName="stat">
+    </div>
+    
+    <div class="p-field">
+    	<label>Téléphone *</label>
+      <input type="text" pInputText formControlName="phone">
+    </div>
+    
+    <div class="p-field">
+    	<label>Adresse *</label>
+      <input type="text" pInputText formControlName="address">
+    </div>
+    
+    <div class="p-field">
+    	<label>TVA</label>
+      <input type="number" pInputText formControlName="tva">
+    </div>
+    
+    <div class="p-field">
+    	<label>Expiration après (jours) *</label>
+      <input type="number" pInputText formControlName="expiration">
+    </div>
+    
+    <div class="p-field">
+    	<label>Méthode de payement *</label>
+      <input type="text" pInputText formControlName="payement">
+    </div>
+
+    <div class="p-field" align="right">
+    	<button 
+    		pButton 
+    		[label]="config.data.action === 'add' ? 'Ajouter' : 'Modifier'" 
+    		[disabled]="supplierForm.invalid" 
+    		(click)="onSubmit()"
+    	></button>
+    </div>
+	</form>
+</div>
