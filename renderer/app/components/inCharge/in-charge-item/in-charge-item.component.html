@@ -1,0 +1,8 @@
+<div class="in-charge-item">
+	<div class="p-d-flex p-jc-between">
+		<button pButton icon="pi pi-pencil" (click)="onEdit()"></button>
+		<button pButton icon="pi pi-times-circle" class="p-button-danger" (click)="onDelete()"></button>
+	</div>
+	<h4 align="center">{{ inCharge.name }}</h4>
+	<p align="center"><i class="pi pi-mobile"></i> {{ inCharge.phone }}</p>
+</div>

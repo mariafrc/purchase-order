@@ -3,7 +3,6 @@ import {IpcService} from '~services/ipc.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {SupplierFormComponent} from '../supplier-form/supplier-form.component';
 
-
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
@@ -14,8 +13,7 @@ export class SupplierComponent implements OnInit {
 	suppliers;
   constructor(
   	public dialogService: DialogService,
-  	private ipcService: IpcService,
-    
+  	private ipcService: IpcService
   ) { }
 
   async ngOnInit() {

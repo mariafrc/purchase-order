@@ -1,0 +1,24 @@
+<div class="container p-pt-4 p-pb-3">	
+	<p-card>
+		<h2 align="center" class="p-m-0">Responsables</h2>
+	</p-card>
+	<button 
+		pButton 
+		label="Nouveau" 
+		icon="pi pi-plus-circle" 
+		iconPos="left" 
+		class="p-mt-2"
+		(click)="onAdd()"
+	></button>
+	<div class="in-charge-container">
+		<app-in-charge-item 
+			style="flex-grow: 1;" 
+			*ngFor="let inCharge of inCharges" 
+			(edit)="onEdit($event)"
+			(delete)="onDelete($event)"
+			[inCharge]="inCharge"
+		></app-in-charge-item>
+	</div>
+</div>
+
+<p-confirmDialog></p-confirmDialog>

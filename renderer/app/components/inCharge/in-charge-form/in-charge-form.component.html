@@ -1,0 +1,22 @@
+<div class="p-fluid">
+	<form #f="ngForm">
+    <div class="p-field">
+    	<label>Nom</label>
+      <input type="text" pInputText name="name" required [(ngModel)]="inCharge.name">
+    </div>
+
+    <div class="p-field">
+    	<label>Téléphone</label>
+      <input type="text" pInputText name="phone" required [(ngModel)]="inCharge.phone">
+    </div>
+
+    <div class="p-field" align="right">
+    	<button 
+    		pButton 
+    		[label]="config.data.action === 'add' ? 'Ajouter' : 'Modifier'" 
+    		[disabled]="f.invalid" 
+    		(click)="onSubmit()"
+    	></button>
+    </div>
+	</form>
+</div>

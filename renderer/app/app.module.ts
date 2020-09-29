@@ -18,6 +18,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SupplierComponent } from './components/supplier/supplier/supplier.component';
 import { SupplierItemComponent } from './components/supplier/supplier-item/supplier-item.component';
 import { SupplierFormComponent } from './components/supplier/supplier-form/supplier-form.component';
+import { InChargeComponent } from './components/inCharge/in-charge/in-charge.component';
+import { InChargeItemComponent } from './components/inCharge/in-charge-item/in-charge-item.component';
+import { InChargeFormComponent } from './components/inCharge/in-charge-form/in-charge-form.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { SupplierFormComponent } from './components/supplier/supplier-form/suppl
     SupplierComponent,
     SupplierItemComponent,
     SupplierFormComponent,
+    InChargeComponent,
+    InChargeItemComponent,
+    InChargeFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,7 @@ import { SupplierFormComponent } from './components/supplier/supplier-form/suppl
     PrimengModule,
     CommonModule,
   ],
-  entryComponents: [SupplierFormComponent],
+  entryComponents: [SupplierFormComponent, InChargeFormComponent],
   providers: [IpcService],
   bootstrap: [AppComponent]
 })
