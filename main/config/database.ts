@@ -20,7 +20,8 @@ export async function initDatabase(){
 				OrderForm,
 				OrderFormArticle,
 				Supplier
-			]
+			],
+			synchronize: true
 	});
 	console.log("Database initialized");
 }
