@@ -14,10 +14,10 @@ export function articleController(){
 	const articleRepository = getRepository(Article);
 	const supplierRepository = getRepository(Supplier);
 	
-	ipcMain.on('request:get-all-acticles', async (event)=>{
+	ipcMain.on('request:get-all-articles', async (event, supplierId)=>{
 		event.sender.send(
-			'get-all-acticles', 
-			await articleRepository.find()
+			'get-all-articles', 
+			await articleRepository.find({supplierId})
 		);
 	})
 

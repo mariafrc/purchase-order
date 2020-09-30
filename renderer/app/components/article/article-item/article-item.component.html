@@ -1,0 +1,13 @@
+<div class="article-item">
+	<h4 class="p-m-1">{{ article.designation }}</h4>
+	<div class="article-content">
+		<div>
+			<p><span>prix:</span> <span>{{ article.price }} Ar</span></p>
+			<p><span>unité:</span> <span>{{ article.unity }}</span></p>
+		</div>
+		<div class="article-buttons">
+			<button pButton icon="pi pi-pencil" (click)="onEdit()"></button>
+			<button pButton icon="pi pi-trash" class="p-button-danger p-ml-1" (click)="onDelete()"></button>
+		</div>
+	</div>
+</div>

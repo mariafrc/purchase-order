@@ -1,0 +1,30 @@
+<div class="container p-pt-4 p-pb-3">	
+	<p-card>
+		<h2 align="center" class="p-m-0">{{ supplier ?  supplier.name : 'Chargement...' }}</h2>
+	</p-card>
+	<button 
+		pButton 
+		label="Retour" 
+		icon="pi pi-plus-circle" 
+		iconPos="left" 
+		class="p-mt-2 p-mr-1"
+		routerLink="/supplier"
+	></button>
+	<button 
+		pButton 
+		label="Nouveau" 
+		icon="pi pi-plus-circle" 
+		iconPos="left" 
+		class="p-mt-2"
+		(click)="onAdd()"
+	></button>
+	<app-article-item 
+		*ngFor="let article of articles" 
+		[article]="article"
+		(edit)="onEdit($event)"
+		(delete)="onDelete($event)"
+	></app-article-item>
+</div>
+
+
+<p-confirmDialog></p-confirmDialog>
