@@ -9,6 +9,8 @@ import {MessageModule} from 'primeng/message';
 import {TooltipModule} from 'primeng/tooltip';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {TableModule} from 'primeng/table';
+import {PanelModule} from 'primeng/panel';
 
 const primengModules = [
 	InputTextModule,
@@ -20,7 +22,9 @@ const primengModules = [
 	MessageModule,
 	TooltipModule,
 	ConfirmDialogModule,
-	DynamicDialogModule
+	DynamicDialogModule,
+	TableModule,
+	PanelModule
 ];
 
 @NgModule({

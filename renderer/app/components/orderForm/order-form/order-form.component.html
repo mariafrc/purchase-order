@@ -1,0 +1,35 @@
+<div class="container p-pt-4 p-pb-3">
+	<p-card>
+		<h2 align="center" class="p-m-0">Bon de commande</h2>
+	</p-card>
+	<div class="order-form-container p-mt-2">
+		<p align="center">Date: {{ date }}</p>
+		<div class="p-fluid">
+			<div class="p-field">
+	    	<label>Résponsable</label>
+				<p-dropdown [options]="inChargeDropdownOptions" [(ngModel)]="selectedInCharge"></p-dropdown>
+			</div>
+			<div class="p-field">
+	    	<label>Fournisseur</label>
+				<p-dropdown [options]="supplierDropdownOptions" [(ngModel)]="selectedSupplier" (onChange)="onSupplierChange()"></p-dropdown>
+			</div>
+		</div>
+		<app-order-form-articles 
+			[articles]="articles" 
+			[supplier]="selectedSupplier"
+			(articleChange)="onArticleChange($event)"
+		></app-order-form-articles>
+		<div *ngIf="selectedSupplier">
+			<p>Echéance: {{ expiration }}</p>
+			<p>Mode de payement: {{ selectedSupplier.payement }}</p>
+		</div>
+		<div class="p-fluid">
+			<div class="p-field">
+				<input type="text" pInputText [(ngModel)]="observation" placeholder="Observation">
+			</div>
+		</div>
+		<div align="right">
+			<button pButton label="Valider" class="p-m-3" (click)="onSave()"></button>
+		</div>
+	</div>
+</div>

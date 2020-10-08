@@ -8,7 +8,7 @@ export class OrderForm{
 	@PrimaryGeneratedColumn()
 	id: number;
 
-	@Column({type: 'datetime'})
+	@Column({type: 'date'})
 	date: string;
 
 	@Column()

@@ -1,0 +1,84 @@
+<div *ngIf="!noArticle && supplier">
+    <div align="right">
+    	<button pButton label="Ajouter" (click)="onAddArticle()"></button>
+    </div>
+    <form [formGroup]="orderForm">
+    	<div formArrayName="articles">
+    		<p-table [value]="articleForm.controls">
+    			<ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Unité</th>
+                <th>PU</th>
+                <th>Quantité</th>
+                <th>Montant</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+            <tr [formGroupName]="rowIndex">
+              <td>
+                <div class="p-d-flex p-jc-around p-ai-center">
+                    <button 
+                        pButton 
+                        icon="pi pi-trash" 
+                        class="p-button-danger" 
+                        (click)="onDeleteArticle(rowIndex)"
+                        *ngIf="articleForm.controls.length > 1"
+                    ></button>
+                    <span>{{ 'L - ' + rowIndex }}</span> 
+                </div>
+              </td>
+
+              <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <div style="width: 100%">
+                            <p-dropdown [options]="articleOptions" formControlName="articleId" (onChange)="onArticleChange(rowIndex)"></p-dropdown>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{rowData.value.designation}}
+                    </ng-template>
+                </p-cellEditor>
+            	</td>
+            	<td>{{rowData.value.unity}}</td>
+            	<td>{{rowData.value.price}}</td>
+            	
+            	<td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input type="number" pInputText formControlName="quantity" style="width: 100%" (change)="emitValue()"/>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{rowData.value.quantity}}
+                    </ng-template>
+                </p-cellEditor>
+            	</td>
+
+            	<td>{{ rowData.value.quantity * rowData.value.price }} AR</td>
+            </tr>
+    	    </ng-template>
+    		</p-table>
+    	</div>
+    </form>
+
+    <div class="p-d-flex" style="flex-direction: row-reverse;">
+        <div class="p-mt-4 total-container">
+            <p>
+                <span>Total hors taxe: </span> 
+                {{ total }} Ar
+            </p>
+            <p>
+                <span>TVA:</span> 
+                {{ calculedTVA }} Ar ({{ supplier.tva }}%)
+            </p>
+            <p>
+                <span>Total TTC:</span> 
+                {{ calculedTotal }} Ar
+            </p>
+        </div>
+    </div>
+    <p>Arreté à la somme de {{ textTotal }} Ariary </p>
+</div>
+<h2 align="center" *ngIf="noArticle">Aucun article pour ce fournisseur</h2>

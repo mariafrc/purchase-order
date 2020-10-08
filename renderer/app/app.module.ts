@@ -24,6 +24,8 @@ import { InChargeFormComponent } from './components/inCharge/in-charge-form/in-c
 import { ArticleComponent } from './components/article/article/article.component';
 import { ArticleFormComponent } from './components/article/article-form/article-form.component';
 import { ArticleItemComponent } from './components/article/article-item/article-item.component';
+import { OrderFormComponent } from './components/orderForm/order-form/order-form.component';
+import { OrderFormArticlesComponent } from './components/orderForm/order-form-articles/order-form-articles.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ArticleItemComponent } from './components/article/article-item/article-
     ArticleComponent,
     ArticleFormComponent,
     ArticleItemComponent,
+    OrderFormComponent,
+    OrderFormArticlesComponent,
   ],
   imports: [
     BrowserModule,
