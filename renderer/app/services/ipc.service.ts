@@ -17,12 +17,22 @@ export class IpcService {
       }
       
       setTimeout(()=>{
-        reject('timeout error')
+        reject('timeout error');
       }, this.timeout)
 
     	ipcRenderer.once(request, (event, response)=>{
         resolve(response);
     	})
+    })
+  }
+
+  connectDatabase(): Promise<boolean>{
+    return new Promise((resolve, reject)=>{
+      ipcRenderer.send('request:connect-database');
+
+      ipcRenderer.once('connect-database', (event, response: boolean)=>{
+        resolve(response);
+      })
     })
   }
 }
