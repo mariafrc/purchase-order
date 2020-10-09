@@ -14,6 +14,7 @@ import {OrderFormArticlesOutput} from '../order-form-articles/order-form-article
   styleUrls: ['./order-form.component.scss']
 })
 export class OrderFormComponent implements OnInit {
+  loading: boolean;
 	date: string = moment().format('YYYY/MM/DD');
   observation: string;
   fromArticlesForm: OrderFormArticlesOutput;
@@ -32,6 +33,7 @@ export class OrderFormComponent implements OnInit {
   ) {}
 
   async ngOnInit(){
+    this.loading = false;
     const result = await Promise.all([
       this.ipcService.execute('get-all-incharges'),
       this.ipcService.execute('get-all-suppliers')
@@ -92,7 +94,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   async onSave(){
-
+    this.loading = true;
     await this.ipcService.execute('create-order-form', {
       date: this.date,
       expiration: this.expiration,
@@ -142,6 +144,6 @@ export class OrderFormComponent implements OnInit {
     doc.text("Le responsable", 110, 270);
     doc.text(this.selectedInCharge.name, 110, 275);
 
-    doc.save();
+    doc.save("bon_de_commande.pdf");
   }
 }

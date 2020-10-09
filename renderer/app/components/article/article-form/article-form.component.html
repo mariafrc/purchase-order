@@ -19,7 +19,7 @@
     	<button 
     		pButton 
     		[label]="config.data.action === 'add' ? 'Ajouter' : 'Modifier'" 
-    		[disabled]="f.invalid" 
+    		[disabled]="f.invalid || loading" 
     		(click)="onSubmit()"
     	></button>
     </div>

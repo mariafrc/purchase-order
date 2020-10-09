@@ -10,6 +10,7 @@ import {IpcService} from '~services/ipc.service';
 })
 export class ArticleFormComponent implements OnInit {
 	article: any;
+  loading: boolean;
 
   constructor(
   	public ref: DynamicDialogRef, 
@@ -19,6 +20,7 @@ export class ArticleFormComponent implements OnInit {
 
   ngOnInit() {
   	this.initArticle();
+    this.loading = false;
   }
 
   initArticle(){
@@ -35,6 +37,7 @@ export class ArticleFormComponent implements OnInit {
   }
 
   async onSubmit(){
+    this.loading = true;
   	const action = (this.config.data.action === "add")
       ? 'create-article' 
       : 'update-article';

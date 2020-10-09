@@ -13,6 +13,7 @@ import {SelectItem} from 'primeng/api';
 export class SupplierFormComponent implements OnInit {
   id: number;
 	supplierForm: FormGroup;
+  loading: boolean;
   payementOptions: SelectItem[] = [
     {label:'Liquide', value: 'cash'},
     {label:'Chèque', value: 'cheque'},
@@ -28,6 +29,7 @@ export class SupplierFormComponent implements OnInit {
 
   ngOnInit(): void {
   	this.initSupplier();
+    this.loading = false;
   }
 
   initSupplier(){
@@ -52,6 +54,7 @@ export class SupplierFormComponent implements OnInit {
   }
 
   async onSubmit(){
+    this.loading = true;
     const action = (this.config.data.action === "add")
       ? 'create-supplier' 
       : 'update-supplier';

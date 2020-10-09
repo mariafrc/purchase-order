@@ -11,6 +11,7 @@ import {IpcService} from '~services/ipc.service';
 })
 export class InChargeFormComponent implements OnInit {
 	inChargeForm: FormGroup;
+  loading: boolean;
 
   constructor(
   	public ref: DynamicDialogRef, 
@@ -21,6 +22,7 @@ export class InChargeFormComponent implements OnInit {
 
   ngOnInit(): void {
   	this.initInForm();
+    this.loading = false;
   }
 
   initInForm(){
@@ -39,6 +41,7 @@ export class InChargeFormComponent implements OnInit {
   }
 
   async onSubmit(){
+    this.loading = true;
   	const action = (this.config.data.action === "add")
       ? 'create-incharge' 
       : 'update-incharge';

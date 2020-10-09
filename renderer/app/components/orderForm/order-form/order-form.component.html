@@ -33,11 +33,20 @@
 		</div>
 		<div align="right">
 			<button 
+				*ngIf="!loading"
 				pButton 
 				label="Valider" 
 				class="p-m-3" 
 				(click)="onSave()"
-				[disabled]="!inCharges || !suppliers || !fromArticlesForm.articles" 
+				[disabled]="!inCharges || !suppliers || (fromArticlesForm && !fromArticlesForm.articles)" 
+			></button>
+			<button 
+				*ngIf="loading"
+				pButton 
+				label="Valider" 
+				icon="pi pi-spin pi-spinner" 
+				class="p-m-3"
+				disabled 
 			></button>
 		</div>
 	</div>
