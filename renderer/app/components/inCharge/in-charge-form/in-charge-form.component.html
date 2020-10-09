@@ -1,20 +1,21 @@
 <div class="p-fluid">
-	<form #f="ngForm">
+	<form [formGroup]="inChargeForm">
     <div class="p-field">
     	<label>Nom</label>
-      <input type="text" pInputText name="name" required [(ngModel)]="inCharge.name">
+      <input type="text" pInputText name="name" required formControlName="name" max="50">
     </div>
 
     <div class="p-field">
     	<label>Téléphone</label>
-      <input type="text" pInputText name="phone" required [(ngModel)]="inCharge.phone">
+      <input type="text" pInputText name="phone" required formControlName="phone" minlength="10" maxlength="10">
+      <span>Numero valide: 032*, 033*, 034*, 039*</span>
     </div>
 
     <div class="p-field" align="right">
     	<button 
     		pButton 
     		[label]="config.data.action === 'add' ? 'Ajouter' : 'Modifier'" 
-    		[disabled]="f.invalid" 
+    		[disabled]="inChargeForm.invalid" 
     		(click)="onSubmit()"
     	></button>
     </div>

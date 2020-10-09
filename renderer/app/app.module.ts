@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {IpcService} from './services/ipc.service';
+import {UtilsService} from './services/utils.service';
 
 //primeng imports
 import { PrimengModule } from './primeng/primeng.module';
@@ -54,7 +55,7 @@ import { OrderFormArticlesComponent } from './components/orderForm/order-form-ar
     CommonModule,
   ],
   entryComponents: [SupplierFormComponent, InChargeFormComponent, ArticleFormComponent],
-  providers: [IpcService],
+  providers: [IpcService, UtilsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

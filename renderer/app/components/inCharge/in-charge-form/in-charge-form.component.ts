@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {IpcService} from '~services/ipc.service';
 
 @Component({
@@ -9,12 +10,13 @@ import {IpcService} from '~services/ipc.service';
   styleUrls: ['./in-charge-form.component.scss']
 })
 export class InChargeFormComponent implements OnInit {
-	inCharge: any;
+	inChargeForm: FormGroup;
 
   constructor(
   	public ref: DynamicDialogRef, 
   	public config: DynamicDialogConfig,
-    private ipcService: IpcService
+    private ipcService: IpcService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -22,14 +24,17 @@ export class InChargeFormComponent implements OnInit {
   }
 
   initInForm(){
-  	this.inCharge = {
+  	this.inChargeForm = this.fb.group({
 			id: null,
-			name: '',
-			phone: ''
-		}
+			name: ['', Validators.required],
+			phone: ['', [
+        Validators.required,
+        Validators.pattern(new RegExp('03[2|3|4|9][0-9]{7,7}'))
+      ]]
+		})
 
 		if(this.config.data.action === 'edit'){
-			this.inCharge = {...this.config.data.inCharge};
+			this.inChargeForm.patchValue(this.config.data.inCharge);
 		}
   }
 
@@ -38,7 +43,7 @@ export class InChargeFormComponent implements OnInit {
       ? 'create-incharge' 
       : 'update-incharge';
     
-    const inCharge = await this.ipcService.execute(action, this.inCharge);
+    const inCharge = await this.ipcService.execute(action, this.inChargeForm.value);
     this.ref.close(inCharge);
   }
 

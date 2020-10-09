@@ -2,17 +2,17 @@
 	<form #f="ngForm">
     <div class="p-field">
     	<label>Designation</label>
-      <input type="text" pInputText name="designation" required [(ngModel)]="article.designation">
+      <input type="text" pInputText name="designation" required [(ngModel)]="article.designation" maxlength="50">
     </div>
 
     <div class="p-field">
-    	<label>Prix</label>
-      <input type="number" pInputText name="price" required [(ngModel)]="article.price">
+    	<label>Prix (Ar)</label>
+      <input type="number" pInputText name="price" required [(ngModel)]="article.price" min="1">
     </div>
 
     <div class="p-field">
     	<label>Unité</label>
-      <input type="text" pInputText name="unity" required [(ngModel)]="article.unity">
+      <input type="text" pInputText name="unity" required [(ngModel)]="article.unity" maxlength="5">
     </div>
 
     <div class="p-field" align="right">

@@ -3,6 +3,7 @@ import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IpcService} from '~services/ipc.service';
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'app-supplier-form',
@@ -12,6 +13,11 @@ import {IpcService} from '~services/ipc.service';
 export class SupplierFormComponent implements OnInit {
   id: number;
 	supplierForm: FormGroup;
+  payementOptions: SelectItem[] = [
+    {label:'Liquide', value: 'cash'},
+    {label:'Chèque', value: 'cheque'},
+    {label:'Virement', value: 'transfert'}
+  ]
 
   constructor(
   	public ref: DynamicDialogRef, 
@@ -30,11 +36,14 @@ export class SupplierFormComponent implements OnInit {
       name: ["", Validators.required],
       nif: ["", Validators.required],
       stat: ["", Validators.required],
-      phone: ["", Validators.required],
+      phone: ["", [
+        Validators.required, 
+        Validators.pattern(new RegExp('03[2|3|4|9][0-9]{7,7}'))
+      ]],
       address: ["", Validators.required],
       tva: 0,
-      expiration: [0, Validators.required],
-      payement: ["", Validators.required]
+      expiration: [1, Validators.required],
+      payement: ["cash", Validators.required]
     })
 
   	if(this.config.data.action === "edit"){  	

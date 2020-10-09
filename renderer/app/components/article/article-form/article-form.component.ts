@@ -25,7 +25,7 @@ export class ArticleFormComponent implements OnInit {
   	this.article = {
   		id: null,
   		designation: '',
-  		price: 0,
+  		price: 1,
   		unity: ''
   	}
 

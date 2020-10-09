@@ -20,7 +20,6 @@ export class InChargeComponent implements OnInit {
 
   async ngOnInit(){
   	this.inCharges = await this.ipcService.execute('get-all-incharges');
-    console.log(this.inCharges);
   }
 
   onAdd(){

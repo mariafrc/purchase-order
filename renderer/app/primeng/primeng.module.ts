@@ -11,6 +11,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {TableModule} from 'primeng/table';
 import {PanelModule} from 'primeng/panel';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 const primengModules = [
 	InputTextModule,
@@ -24,7 +25,8 @@ const primengModules = [
 	ConfirmDialogModule,
 	DynamicDialogModule,
 	TableModule,
-	PanelModule
+	PanelModule,
+	SelectButtonModule
 ];
 
 @NgModule({

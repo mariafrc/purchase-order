@@ -2,7 +2,7 @@
 	<form [formGroup]="supplierForm">
     <div class="p-field">
     	<label>Nom *</label>
-      <input type="text" pInputText formControlName="name">
+      <input type="text" pInputText formControlName="name" maxlength="50">
     </div>
 
     <div class="p-field">
@@ -17,27 +17,28 @@
     
     <div class="p-field">
     	<label>Téléphone *</label>
-      <input type="text" pInputText formControlName="phone">
+      <input type="text" pInputText formControlName="phone" minlength="10" maxlength="10">
+      <span>Numero valide: 032*, 033*, 034*, 039*</span>
     </div>
     
     <div class="p-field">
     	<label>Adresse *</label>
-      <input type="text" pInputText formControlName="address">
+      <input type="text" pInputText formControlName="address" maxlength="20">
     </div>
     
     <div class="p-field">
-    	<label>TVA</label>
-      <input type="number" pInputText formControlName="tva">
+    	<label>TVA (%)</label>
+      <input type="number" pInputText formControlName="tva" min="1" max="100">
     </div>
     
     <div class="p-field">
     	<label>Expiration après (jours) *</label>
-      <input type="number" pInputText formControlName="expiration">
+      <input type="number" pInputText formControlName="expiration" min="1">
     </div>
     
     <div class="p-field">
     	<label>Méthode de payement *</label>
-      <input type="text" pInputText formControlName="payement">
+      <p-selectButton [options]="payementOptions" formControlName="payement"></p-selectButton>
     </div>
 
     <div class="p-field" align="right">

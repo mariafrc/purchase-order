@@ -3,6 +3,7 @@ import {IpcService} from '~services/ipc.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {SupplierFormComponent} from '../supplier-form/supplier-form.component';
 import {ConfirmationService} from 'primeng/api';
+import {UtilsService} from '~services/utils.service';
 
 @Component({
   selector: 'app-supplier-item',
@@ -14,10 +15,12 @@ export class SupplierItemComponent implements OnInit {
 	@Input() supplier!: any;
 	@Output() edited: EventEmitter<any> = new EventEmitter()
   @Output() deleted: EventEmitter<number> = new EventEmitter()
+  translate = this.utilsService.translatePayement;
   constructor(
   	public dialogService: DialogService,
   	private ipcService: IpcService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit(): void {

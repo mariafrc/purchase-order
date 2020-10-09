@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
 import * as writtenNumber from 'written-number';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-order-form-articles',
   templateUrl: './order-form-articles.component.html',
-  styleUrls: ['./order-form-articles.component.scss']
+  styleUrls: ['./order-form-articles.component.scss'],
+  providers: [MessageService]
 })
 export class OrderFormArticlesComponent implements OnInit {
   @Output() articleChange: EventEmitter<any> = new EventEmitter();
@@ -22,7 +24,8 @@ export class OrderFormArticlesComponent implements OnInit {
   articleOptions: {label: string, value: number}[];
   
   constructor(
-  	private fb: FormBuilder
+  	private fb: FormBuilder,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -62,12 +65,19 @@ export class OrderFormArticlesComponent implements OnInit {
   }
 
   onAddArticle(){
+    if(this.articleForm.length >=15){
+      return this.messageService.add({
+        severity: 'info', 
+        summary: "Avertissement", 
+        detail: "Vous avez dépassé la limite autorisée"
+      });
+    }
   	const article = this.fb.group({
       articleId: this.articles[0].id,
   		designation: [this.articles[0].designation, Validators.required],
   		unity: this.articles[0].unity,
   		price: this.articles[0].price,
-  		quantity: 0
+  		quantity: 1
   	})
 
   	this.articleForm.push(article);

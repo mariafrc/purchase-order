@@ -26,7 +26,7 @@
                         (click)="onDeleteArticle(rowIndex)"
                         *ngIf="articleForm.controls.length > 1"
                     ></button>
-                    <span>{{ 'L - ' + rowIndex }}</span> 
+                    <span>{{ 'L - ' + (rowIndex + 1) }}</span> 
                 </div>
               </td>
 
@@ -48,7 +48,7 @@
             	<td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input type="number" pInputText formControlName="quantity" style="width: 100%" (change)="emitValue()"/>
+                        <input type="number" pInputText formControlName="quantity" style="width: 100%" (change)="emitValue()" min="1" />
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{rowData.value.quantity}}
@@ -82,3 +82,4 @@
     <p>Arreté à la somme de {{ textTotal }} Ariary </p>
 </div>
 <h2 align="center" *ngIf="noArticle">Aucun article pour ce fournisseur</h2>
+<p-toast></p-toast>

@@ -60,7 +60,9 @@ export class OrderFormComponent implements OnInit {
 
   onArticleChange(articlesFormData){
     const {articles, ...totals} = articlesFormData;
-    this.articlesFormResult = articles;
+    setTimeout(()=>{
+      this.articlesFormResult = articles;
+    }, 500)
     this.totals = totals;
   }
 
