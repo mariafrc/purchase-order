@@ -2,6 +2,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
 import * as writtenNumber from 'written-number';
 import {MessageService} from 'primeng/api';
+import {Supplier} from '~interfaces/supplier.interface';
+import {Article} from '~interfaces/article.interface';
+
+export interface OrderFormArticlesOutput{
+  articles: ArticleFormData[];
+  total: number;
+  calculedTVA: number;
+  calculedTotal: number;
+  textTotal: string;
+}
+
+export interface ArticleFormData{
+  designation: string;
+  unity: string;
+  price: number;
+  quantity: number;
+}
 
 @Component({
   selector: 'app-order-form-articles',
@@ -11,12 +28,12 @@ import {MessageService} from 'primeng/api';
 })
 export class OrderFormArticlesComponent implements OnInit {
   @Output() articleChange: EventEmitter<any> = new EventEmitter();
-  @Input() supplier: any;
+  @Input() supplier: Supplier;
 	
-  _articles: any[];
+  _articles: Article[];
   noArticle: boolean = false;
-	@Input() set articles(data){ 
-    this.initArticles(data);  
+	@Input() set articles(inputArticles: Article[]){ 
+    this.initArticles(inputArticles);  
   }
 	get articles(){return this._articles}
 	
@@ -34,14 +51,14 @@ export class OrderFormArticlesComponent implements OnInit {
   	});
   }
 
-  initArticles(data){
-    if(data && data.length){
-      this._articles = data;
+  initArticles(inputArticles: Article[]){
+    if(inputArticles && inputArticles.length){
+      this._articles = inputArticles;
       this.noArticle = false;
       
       //init options for dropdown
       this.articleOptions = [];
-      for(const article of data){
+      for(const article of inputArticles){
         this.articleOptions.push({
           label: article.designation,
           value: article.id
@@ -92,7 +109,7 @@ export class OrderFormArticlesComponent implements OnInit {
       designation: article.designation,
       unity: article.unity,
       price: article.price,
-      quantity: 0
+      quantity: 1
     })
     this.emitValue();
   }
@@ -124,7 +141,7 @@ export class OrderFormArticlesComponent implements OnInit {
   }
 
   emitValue(){
-    const output = {
+    const output: OrderFormArticlesOutput = {
       articles: [],
       total: this.total,
       calculedTVA: this.calculedTVA,

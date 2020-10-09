@@ -3,6 +3,7 @@ import {IpcService} from '~services/ipc.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {InChargeFormComponent} from '../in-charge-form/in-charge-form.component';
 import {ConfirmationService} from 'primeng/api';
+import {InCharge} from '~interfaces/in-charge.interface';
 
 @Component({
   selector: 'app-in-charge',
@@ -11,7 +12,7 @@ import {ConfirmationService} from 'primeng/api';
   providers: [DialogService, ConfirmationService]
 })
 export class InChargeComponent implements OnInit {
-	inCharges: any;
+	inCharges: InCharge[];
   constructor(
   	public dialogService: DialogService,
     private confirmation: ConfirmationService,
@@ -19,7 +20,7 @@ export class InChargeComponent implements OnInit {
   ) { }
 
   async ngOnInit(){
-  	this.inCharges = await this.ipcService.execute('get-all-incharges');
+  	this.inCharges = await this.ipcService.execute('get-all-incharges') as InCharge[];
   }
 
   onAdd(){

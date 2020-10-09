@@ -3,6 +3,10 @@ import {IpcService} from '~services/ipc.service';
 import * as moment from 'moment';
 import {jsPDF} from 'jspdf';
 import autoTable from 'jspdf-autotable'
+import {Supplier} from '~interfaces/supplier.interface';
+import {InCharge} from '~interfaces/in-charge.interface';
+import {Article} from '~interfaces/article.interface';
+import {OrderFormArticlesOutput} from '../order-form-articles/order-form-articles.component';
 
 @Component({
   selector: 'app-order-form',
@@ -12,17 +16,16 @@ import autoTable from 'jspdf-autotable'
 export class OrderFormComponent implements OnInit {
 	date: string = moment().format('YYYY/MM/DD');
   observation: string;
-  articlesFormResult: any[];
-  totals: any;
+  fromArticlesForm: OrderFormArticlesOutput;
 	
-	inCharges: any;
-  inChargeDropdownOptions: {label: string, value: any}[]= [];
-  selectedInCharge: any;
+	inCharges: InCharge[];
+  inChargeDropdownOptions: {label: string, value: InCharge}[]= [];
+  selectedInCharge: InCharge;
 
-  suppliers: any;
-  supplierDropdownOptions: {label: string, value: any}[] = [];
-	selectedSupplier: any;
-	articles: any;
+  suppliers: Supplier[];
+  supplierDropdownOptions: {label: string, value: Supplier}[] = [];
+	selectedSupplier: Supplier;
+	articles: Article[];
 
   constructor(
   	private ipcService: IpcService
@@ -34,7 +37,7 @@ export class OrderFormComponent implements OnInit {
       this.ipcService.execute('get-all-suppliers')
     ])
 
-  	this.inCharges = result[0];
+  	this.inCharges = result[0] as InCharge[];
     for(let inCharge of this.inCharges){
       this.inChargeDropdownOptions.push({
         label: inCharge.name,
@@ -43,7 +46,7 @@ export class OrderFormComponent implements OnInit {
     }
     this.selectedInCharge = this.inCharges[0];
 
-    this.suppliers = result[1];
+    this.suppliers = result[1] as Supplier[];
   	for(let supplier of this.suppliers){
   		this.supplierDropdownOptions.push({
   			label: supplier.name,
@@ -51,19 +54,17 @@ export class OrderFormComponent implements OnInit {
   		})
   	}
   	this.selectedSupplier = this.suppliers[0];
-  	this.articles = await this.ipcService.execute('get-all-articles', this.selectedSupplier.id);
+  	this.articles = await this.ipcService.execute('get-all-articles', this.selectedSupplier.id) as Article[];
   }
 
   async onSupplierChange(){
-    this.articles = await this.ipcService.execute('get-all-articles', this.selectedSupplier.id);
+    this.articles = await this.ipcService.execute('get-all-articles', this.selectedSupplier.id) as Article[];
   }
 
-  onArticleChange(articlesFormData){
-    const {articles, ...totals} = articlesFormData;
+  onArticleChange(articlesFormData: OrderFormArticlesOutput){
     setTimeout(()=>{
-      this.articlesFormResult = articles;
+      this.fromArticlesForm = articlesFormData;
     }, 500)
-    this.totals = totals;
   }
 
   get expiration(){
@@ -74,14 +75,14 @@ export class OrderFormComponent implements OnInit {
     const output = [];
 
     for(let i=0; i<14; i++){
-      if(this.articlesFormResult[i]){
+      if(this.fromArticlesForm.articles[i]){
         output.push([
           'L - ' + (i + 1),
-          this.articlesFormResult[i].designation,
-          this.articlesFormResult[i].unity,
-          this.articlesFormResult[i].price,
-          this.articlesFormResult[i].quantity,
-          this.articlesFormResult[i].price * this.articlesFormResult[i].quantity
+          this.fromArticlesForm.articles[i].designation,
+          this.fromArticlesForm.articles[i].unity,
+          this.fromArticlesForm.articles[i].price,
+          this.fromArticlesForm.articles[i].quantity,
+          this.fromArticlesForm.articles[i].price * this.fromArticlesForm.articles[i].quantity
         ])
       } else {
         output.push(['---']);
@@ -99,7 +100,7 @@ export class OrderFormComponent implements OnInit {
       payement: this.selectedSupplier.payement,
       inChargeId: this.selectedInCharge.id,
       supplierId: this.selectedSupplier.id,
-      articles: this.articlesFormResult
+      articles: this.fromArticlesForm.articles
     });
 
     const doc = new jsPDF();
@@ -125,15 +126,15 @@ export class OrderFormComponent implements OnInit {
     doc.setFontSize(12);
 
     doc.text("Total Hors taxes:", 120, 230);
-    doc.text(this.totals.total + " Ariary", 160, 230);
+    doc.text(this.fromArticlesForm.total + " Ariary", 160, 230);
 
     doc.text("TVA:", 120, 235);
-    doc.text(this.totals.calculedTVA + " Ariary", 160, 235);
+    doc.text(this.fromArticlesForm.calculedTVA + " Ariary", 160, 235);
 
     doc.text("Total TTC:", 120, 240);
-    doc.text(this.totals.calculedTotal + " Ariary", 160, 240);
+    doc.text(this.fromArticlesForm.calculedTotal + " Ariary", 160, 240);
 
-    doc.text("Arreté à la somme de " + this.totals.textTotal + " Ariary", 15, 250);
+    doc.text("Arreté à la somme de " + this.fromArticlesForm.textTotal + " Ariary", 15, 250);
     doc.text(`Mode de payement: ${this.selectedSupplier.payement}`, 15, 255);
     doc.text(`Date d'échéance: ${this.expiration}`, 15, 260);
     doc.text(`observation: ${this.observation || 'Aucune'}`, 15, 265);

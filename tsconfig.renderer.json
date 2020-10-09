@@ -6,7 +6,8 @@
     "types": [],
     "paths": {
       "~components/*": ["renderer/app/components/*"],
-      "~services/*": ["renderer/app/services/*"]
+      "~services/*": ["renderer/app/services/*"],
+      "~interfaces/*": ["renderer/app/interfaces/*"]
     }
   },
   "files": [

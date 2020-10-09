@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Article} from '~interfaces/article.interface';
 
 @Component({
   selector: 'app-article-item',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./article-item.component.scss']
 })
 export class ArticleItemComponent implements OnInit {
-	@Input() article: any;
+	@Input() article: Article;
 	@Output() edit: EventEmitter<number> = new EventEmitter();
 	@Output() delete: EventEmitter<number> = new EventEmitter();
   constructor() { }

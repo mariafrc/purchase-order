@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {IpcService} from '~services/ipc.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {SupplierFormComponent} from '../supplier-form/supplier-form.component';
+import {Supplier} from '~interfaces/supplier.interface';
 
 @Component({
   selector: 'app-supplier',
@@ -10,14 +11,14 @@ import {SupplierFormComponent} from '../supplier-form/supplier-form.component';
   providers: [DialogService]
 })
 export class SupplierComponent implements OnInit {
-	suppliers;
+	suppliers: Supplier[];
   constructor(
   	public dialogService: DialogService,
   	private ipcService: IpcService
   ) { }
 
   async ngOnInit() {
-  	this.suppliers = await this.ipcService.execute('get-all-suppliers');
+  	this.suppliers = await this.ipcService.execute('get-all-suppliers') as Supplier[];
   }
 
   onAdd(){

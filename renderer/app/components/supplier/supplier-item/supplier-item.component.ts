@@ -4,6 +4,7 @@ import {DialogService} from 'primeng/dynamicdialog';
 import {SupplierFormComponent} from '../supplier-form/supplier-form.component';
 import {ConfirmationService} from 'primeng/api';
 import {UtilsService} from '~services/utils.service';
+import {Supplier} from '~interfaces/supplier.interface';
 
 @Component({
   selector: 'app-supplier-item',
@@ -12,7 +13,7 @@ import {UtilsService} from '~services/utils.service';
   providers: [ConfirmationService]
 })
 export class SupplierItemComponent implements OnInit {
-	@Input() supplier!: any;
+	@Input() supplier: Supplier;
 	@Output() edited: EventEmitter<any> = new EventEmitter()
   @Output() deleted: EventEmitter<number> = new EventEmitter()
   translate = this.utilsService.translatePayement;

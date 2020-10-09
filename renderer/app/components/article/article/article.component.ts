@@ -4,6 +4,7 @@ import {IpcService} from '~services/ipc.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {ConfirmationService} from 'primeng/api';
 import {ArticleFormComponent} from '../article-form/article-form.component';
+import {Article} from '~interfaces/article.interface';
 
 @Component({
   selector: 'app-article',
@@ -13,7 +14,7 @@ import {ArticleFormComponent} from '../article-form/article-form.component';
 })
 export class ArticleComponent implements OnInit {
 	supplier: any;
-	articles: any;
+	articles: Article[];
   constructor(
   	private route: ActivatedRoute,
   	public dialogService: DialogService,
@@ -29,7 +30,7 @@ export class ArticleComponent implements OnInit {
   	this.articles = await this.ipcService.execute(
   		'get-all-articles',
   		this.route.snapshot.params['id']
-  	)
+  	) as Article[]
   }
 
   onAdd(){
