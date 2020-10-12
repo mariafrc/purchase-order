@@ -13,7 +13,7 @@ export function inChargeController(){
 	ipcMain.on('request:get-all-incharges', async (event)=>{
 		event.sender.send(
 			'get-all-incharges', 
-			await inChargeRepository.find()
+			await inChargeRepository.find({isDeleted: false})
 		);
 	})
 
@@ -42,10 +42,10 @@ export function inChargeController(){
 	})
 
 	ipcMain.on('request:delete-incharge', async (event, id: number)=>{
-		const inCharge = await inChargeRepository.findOne(id);
+		await inChargeRepository.update(id, {isDeleted: true});
 		event.sender.send(
 			'delete-incharge',
-			await inChargeRepository.remove(inCharge)
+			await inChargeRepository.findOne(id)
 		);
 	})
 }

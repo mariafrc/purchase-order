@@ -8,4 +8,5 @@ export interface Supplier{
 	tva?: number;
 	expiration: number;
 	payement: string;
+	isDeleted: boolean;
 }

@@ -19,7 +19,7 @@ export function supplierController(){
 	ipcMain.on('request:get-all-suppliers', async (event)=>{
 		event.sender.send(
 			'get-all-suppliers', 
-			await supplierRepository.find()
+			await supplierRepository.find({isDeleted: false})
 		);
 	})
 
@@ -48,10 +48,10 @@ export function supplierController(){
 	})
 
 	ipcMain.on('request:delete-supplier', async (event, id: number)=>{
-		const supplier = await supplierRepository.findOne(id);
+		await supplierRepository.update(id, {isDeleted: true});
 		event.sender.send(
 			'delete-supplier',
-			await supplierRepository.remove(supplier)
+			await supplierRepository.findOne(id)
 		);
 	})
 }

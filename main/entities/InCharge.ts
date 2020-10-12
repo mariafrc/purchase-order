@@ -12,6 +12,9 @@ export class InCharge{
 	@Column()
 	phone: string;
 
+	@Column({default: false})
+	isDeleted: boolean;
+
 	@OneToMany(() => OrderForm, (orderForm) => orderForm.inCharge)
 	orderForms: OrderForm[];
 }

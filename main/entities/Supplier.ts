@@ -31,6 +31,9 @@ export class Supplier{
 	@Column()
 	payement: string;
 
+	@Column({default: false})
+	isDeleted: boolean;
+
 	@OneToMany(() => Article, (article) => article.supplier)
 	articles: Article[];
 
