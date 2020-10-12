@@ -7,6 +7,7 @@ import autoTable from 'jspdf-autotable'
 import * as writtenNumber from 'written-number';
 import {Supplier} from '~interfaces/supplier.interface';
 import {InCharge} from '~interfaces/in-charge.interface';
+import {UtilsService} from '~services/utils.service';
 
 @Component({
   selector: 'app-order-form-list',
@@ -14,6 +15,7 @@ import {InCharge} from '~interfaces/in-charge.interface';
   styleUrls: ['./order-form-list.component.scss']
 })
 export class OrderFormListComponent implements OnInit {
+  loading: boolean;
 	orderForms: OrderForm[];
 
   selectedDate: string = '';
@@ -27,10 +29,12 @@ export class OrderFormListComponent implements OnInit {
   selectedSupplier: number = 0;
   
   constructor(
-  	private ipcService: IpcService
+  	private ipcService: IpcService,
+    private utils: UtilsService
   ) { }
 
   async ngOnInit() {
+    this.loading = false;
   	this.orderForms = await this.ipcService.execute('get-all-order-forms') as OrderForm[];
 
     const result = await Promise.all([
@@ -101,6 +105,7 @@ export class OrderFormListComponent implements OnInit {
   }
 
   onExport(orderForm: OrderForm){
+    this.loading = true;
     let total = 0;
     for(const article of orderForm.articles){
       total += (article.price * article.quantity);
@@ -139,7 +144,7 @@ export class OrderFormListComponent implements OnInit {
     doc.text((total+tva) + " Ariary", 160, 240);
 
     doc.text("Arreté à la somme de " + writtenNumber((total+tva), {lang: 'fr'}) + " Ariary", 15, 250);
-    doc.text(`Mode de payement: ${orderForm.payement}`, 15, 255);
+    doc.text(`Mode de payement: ${this.utils.translatePayement(orderForm.payement)}`, 15, 255);
     doc.text(`Date d'échéance: ${orderForm.expiration}`, 15, 260);
     doc.text(`observation: ${orderForm.observation || 'Aucune'}`, 15, 265);
 
@@ -147,6 +152,7 @@ export class OrderFormListComponent implements OnInit {
     doc.text(orderForm.inCharge.name, 110, 275);
 
     doc.save("bon_de_commande.pdf");
+    this.loading = false;
   }
 
 }

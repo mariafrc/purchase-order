@@ -4,7 +4,7 @@
 	</p-card>
 
 	<div class="p-m-2">
-		<button pButton label="retour" routerLink="/orderForm/list"></button>
+		<button pButton label="retour" routerLink="/orderForm/list" icon="pi pi-arrow-left"></button>
 	</div>
 
   <p-card>
@@ -37,7 +37,7 @@
     <p class="p-m-0">TVA: {{ tva }}</p>
     <p class="p-m-0">Total TTC: {{ total + tva }}</p>
     <p class="p-mb-0">Expiration: {{ orderForm.expiration }}</p>
-    <p class="p-m-0">Paiement: {{ orderForm.payement }}</p>
+    <p class="p-m-0">Paiement: {{ translatePayement(orderForm.payement) }}</p>
     <p>Responsable: {{ orderForm.inCharge.name }}</p>
   </p-card>
 </div>

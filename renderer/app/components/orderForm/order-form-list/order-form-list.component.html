@@ -1,6 +1,9 @@
 <div class="container p-pt-4 p-pb-3">
 	<p-card>
-		<h2 align="center" class="p-m-0">Liste des bons de commande</h2>
+		<h2 align="center" class="p-m-0">
+			Liste des bons de commande 
+			<i class="pi pi-spin pi-spinner" *ngIf="loading"></i>
+		</h2>
 	</p-card>
 
 	<div class="p-mt-3">
@@ -45,8 +48,8 @@
 	            <td> {{ rowData.inCharge.name }} </td>
 	            <td> {{ rowData.supplier.name }} </td>
 	            <td> 
-	            	<button pButton label="Voir" class="p-mr-2" [routerLink]="rowData.id"></button>
-								<button pButton label="Exporter" (click)="onExport(rowData)"></button>
+	            	<button pButton icon="pi pi-eye" label="Voir" class="p-mr-2" [routerLink]="rowData.id"></button>
+								<button pButton icon="pi pi-file-pdf" label="Exporter" (click)="onExport(rowData)"></button>
 	            </td>
 	        </tr>
 	    </ng-template>

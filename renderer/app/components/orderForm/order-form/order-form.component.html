@@ -24,7 +24,7 @@
 		></app-order-form-articles>
 		<div *ngIf="selectedSupplier">
 			<p>Echéance: {{ expiration }}</p>
-			<p>Mode de payement: {{ selectedSupplier.payement }}</p>
+			<p>Mode de payement: {{ translatePayement(selectedSupplier.payement) }}</p>
 		</div>
 		<div class="p-fluid">
 			<div class="p-field">

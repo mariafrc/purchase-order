@@ -1,12 +1,13 @@
 .app-layout{
 	width: 100%;
 	background: var(--surface-c);
+	min-height: 100%;
 	@media (screen and min-width: 768px){
 		display: flex;
 		height: 100%;
 	}
 	.app-navbar{
-		width: 200px;
+		width: 250px;
 	}
 	.app-content{
 		width: 100%;

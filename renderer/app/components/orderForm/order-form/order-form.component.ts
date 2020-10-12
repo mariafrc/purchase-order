@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {IpcService} from '~services/ipc.service';
+import {UtilsService} from '~services/utils.service';
 import * as moment from 'moment';
 import {Supplier} from '~interfaces/supplier.interface';
 import {InCharge} from '~interfaces/in-charge.interface';
@@ -14,6 +15,7 @@ import {Router} from '@angular/router';
 })
 export class OrderFormComponent implements OnInit {
   loading: boolean;
+  translatePayement = this.utils.translatePayement;
 	date: string = moment().format('YYYY/MM/DD');
   observation: string;
   fromArticlesForm: ArticleFormData[] = [];
@@ -29,7 +31,8 @@ export class OrderFormComponent implements OnInit {
 
   constructor(
   	private ipcService: IpcService,
-    private router: Router
+    private router: Router,
+    private utils: UtilsService
   ) {}
 
   async ngOnInit(){

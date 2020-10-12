@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {IpcService} from '~services/ipc.service';
+import {UtilsService} from '~services/utils.service';
 import {OrderForm} from '~interfaces/order-form.interface';
 import * as moment from 'moment';
 
@@ -11,9 +12,11 @@ import * as moment from 'moment';
 })
 export class OrderFormFocusComponent implements OnInit {
 	orderForm: OrderForm;
+  translatePayement = this.utils.translatePayement;
   constructor(
   	private route: ActivatedRoute,
-  	private ipcService: IpcService
+  	private ipcService: IpcService,
+    private utils: UtilsService
   ) { }
 
   async ngOnInit(){
