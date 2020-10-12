@@ -31,14 +31,14 @@ export function orderFormController(){
 	ipcMain.on('request:get-all-order-forms', async (event)=>{
 		event.sender.send(
 			'get-all-order-forms', 
-			await orderFormRepository.find()
+			await orderFormRepository.find({relations: ['supplier', 'inCharge', 'articles']})
 		);
 	})
 
 	ipcMain.on('request:get-one-order-form', async (event, orderFormId: number)=>{
 		event.sender.send(
 			'get-one-order-form', 
-			await orderFormRepository.findOne(orderFormId)
+			await orderFormRepository.findOne(orderFormId, {relations: ['supplier', 'inCharge', 'articles']})
 		);
 	})
 

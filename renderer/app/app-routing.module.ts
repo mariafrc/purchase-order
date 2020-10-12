@@ -7,6 +7,8 @@ import { InChargeComponent } from './components/inCharge/in-charge/in-charge.com
 import { ArticleComponent } from './components/article/article/article.component';
 import {OrderFormComponent} from './components/orderForm/order-form/order-form.component';
 import { DatabaseConnectionComponent } from './components/database-connection/database-connection.component';
+import { OrderFormListComponent } from './components/orderForm/order-form-list/order-form-list.component';
+import { OrderFormFocusComponent } from './components/orderForm/order-form-focus/order-form-focus.component';
 
 const routes: Routes = [
 	{path: '', redirectTo: 'connection', pathMatch: 'full'},
@@ -14,7 +16,9 @@ const routes: Routes = [
 	{path: 'supplier', component: SupplierComponent, canActivate: [ConnectionGuard]},
 	{path: 'inCharge', component: InChargeComponent, canActivate: [ConnectionGuard]},
 	{path: 'supplier/:id/article', component: ArticleComponent, canActivate: [ConnectionGuard]},
-	{path: 'orderForm', component: OrderFormComponent, canActivate: [ConnectionGuard]}
+	{path: 'orderForm/form', component: OrderFormComponent, canActivate: [ConnectionGuard]},
+	{path: 'orderForm/list', component: OrderFormListComponent, canActivate: [ConnectionGuard]},
+	{path: 'orderForm/list/:id', component: OrderFormFocusComponent, canActivate: [ConnectionGuard]}
 ];
 
 @NgModule({

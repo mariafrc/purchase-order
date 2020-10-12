@@ -28,6 +28,8 @@ import { ArticleItemComponent } from './components/article/article-item/article-
 import { OrderFormComponent } from './components/orderForm/order-form/order-form.component';
 import { OrderFormArticlesComponent } from './components/orderForm/order-form-articles/order-form-articles.component';
 import { DatabaseConnectionComponent } from './components/database-connection/database-connection.component';
+import { OrderFormListComponent } from './components/orderForm/order-form-list/order-form-list.component';
+import { OrderFormFocusComponent } from './components/orderForm/order-form-focus/order-form-focus.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { DatabaseConnectionComponent } from './components/database-connection/da
     OrderFormComponent,
     OrderFormArticlesComponent,
     DatabaseConnectionComponent,
+    OrderFormListComponent,
+    OrderFormFocusComponent,
   ],
   imports: [
     BrowserModule,

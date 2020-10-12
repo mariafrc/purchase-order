@@ -11,7 +11,7 @@ export class OrderForm{
 	@Column({type: 'date'})
 	date: string;
 
-	@Column()
+	@Column({type: 'date'})
 	expiration: string;
 
 	@Column({type: 'text'})
@@ -23,15 +23,9 @@ export class OrderForm{
 	@ManyToOne(() => InCharge, (inCharge) => inCharge.orderForms)
 	inCharge: InCharge;
 
-	@Column()
-	inChargeId: number;
-
 	@ManyToOne(() => Supplier, (supplier) => supplier.orderForms)
 	supplier: Supplier;
 
-	@Column()
-	supplierId: number;
-
-	@OneToMany(() => OrderFormArticle, (article) => article.orderForm)
+	@OneToMany(() => OrderFormArticle, (article) => article.orderForm, {onDelete: "CASCADE"})
 	articles: OrderFormArticle[];
 }

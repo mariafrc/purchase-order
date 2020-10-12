@@ -5,14 +5,6 @@ import {MessageService} from 'primeng/api';
 import {Supplier} from '~interfaces/supplier.interface';
 import {Article} from '~interfaces/article.interface';
 
-export interface OrderFormArticlesOutput{
-  articles: ArticleFormData[];
-  total: number;
-  calculedTVA: number;
-  calculedTotal: number;
-  textTotal: string;
-}
-
 export interface ArticleFormData{
   designation: string;
   unity: string;
@@ -141,16 +133,10 @@ export class OrderFormArticlesComponent implements OnInit {
   }
 
   emitValue(){
-    const output: OrderFormArticlesOutput = {
-      articles: [],
-      total: this.total,
-      calculedTVA: this.calculedTVA,
-      calculedTotal: this.calculedTotal,
-      textTotal: this.textTotal
-    };
+    const output: ArticleFormData[] = [];
     for(let article of this.articleForm.controls){
       const {articleId, ...articleData} = article.value;
-      output.articles.push(articleData);
+      output.push(articleData);
     }
     this.articleChange.emit(output);
   }

@@ -33,8 +33,10 @@
               <td pEditableColumn>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <div style="width: 100%">
-                            <p-dropdown [options]="articleOptions" formControlName="articleId" (onChange)="onArticleChange(rowIndex)"></p-dropdown>
+                        <div class="p-fluid" style="width: 100%">
+                            <div class="p-field">
+                                <p-dropdown [options]="articleOptions" formControlName="articleId" (onChange)="onArticleChange(rowIndex)"></p-dropdown>
+                            </div>
                         </div>
                     </ng-template>
                     <ng-template pTemplate="output">

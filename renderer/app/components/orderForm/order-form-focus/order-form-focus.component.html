@@ -1,0 +1,43 @@
+<div class="container p-pt-4 p-pb-3" *ngIf="orderForm">
+	<p-card>
+		<h2 align="center" class="p-m-0">{{ orderForm.id }}/{{ orderForm.date }}</h2>
+	</p-card>
+
+	<div class="p-m-2">
+		<button pButton label="retour" routerLink="/orderForm/list"></button>
+	</div>
+
+  <p-card>
+    <p>Fournisseur: {{ orderForm.supplier.name }}</p>
+    <h3 class="p-mt-0">Articles</h3>
+  	<p-table [value]="orderForm.articles">
+  		<ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Unité</th>
+            <th>PU</th>
+            <th>Quantité</th>
+            <th>Montant</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+        <tr>
+          <td>L - {{ rowIndex+1 }}</td>
+          <td>{{ rowData.designation }}</td>
+          <td>{{ rowData.unity }}</td>
+          <td>{{ rowData.price }}</td>
+          <td>{{ rowData.quantity }}</td>
+          <td>{{ rowData.quantity * rowData.price }}</td>
+        </tr>
+      </ng-template>
+  	</p-table>
+
+    <p class="p-mb-0">Total Hors taxes: {{ total }}</p>
+    <p class="p-m-0">TVA: {{ tva }}</p>
+    <p class="p-m-0">Total TTC: {{ total + tva }}</p>
+    <p class="p-mb-0">Expiration: {{ orderForm.expiration }}</p>
+    <p class="p-m-0">Paiement: {{ orderForm.payement }}</p>
+    <p>Responsable: {{ orderForm.inCharge.name }}</p>
+  </p-card>
+</div>

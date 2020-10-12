@@ -32,7 +32,8 @@ try {
                     orderFormController();
                     event.sender.send('connect-database', true);
                 })
-                .catch(()=>{
+                .catch((err)=>{
+                    throw err;
                     event.sender.send('connect-database', false);
                 })
         })

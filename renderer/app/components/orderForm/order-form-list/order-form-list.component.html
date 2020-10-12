@@ -1,0 +1,55 @@
+<div class="container p-pt-4 p-pb-3">
+	<p-card>
+		<h2 align="center" class="p-m-0">Liste des bons de commande</h2>
+	</p-card>
+
+	<div class="p-mt-3">
+		<p-table [value]="filteredOrderForms" [paginator]="true" [rows]="10">
+	    <ng-template pTemplate="header" let-columns>
+	        <tr>
+	            <th>Identifiant</th>
+	            <th>Responsable</th>
+	            <th>Fournisseur</th>
+	            <th>Gestion</th>
+	        </tr>
+	        <tr>
+	        	<th>
+	        		<div class="p-fluid" style="width: 100%">
+            		<div class="p-field">
+	        				<input type="date" pInputText style="width: 100%" [(ngModel)]="selectedDate">
+            		</div>
+            	</div>
+	        	</th>
+            <th>
+            	<div class="p-fluid" style="width: 100%">
+            		<div class="p-field">
+            			<p-dropdown [options]="inChargeDropdownOptions" [(ngModel)]="selectedInCharge" *ngIf="inCharges"></p-dropdown>
+            		</div>
+            	</div>
+            </th>
+            <th>
+            	<div class="p-fluid" style="width: 100%">
+            		<div class="p-field">
+            			<p-dropdown [options]="supplierDropdownOptions" [(ngModel)]="selectedSupplier" *ngIf="suppliers"></p-dropdown>
+            		</div>
+            	</div>
+            </th>
+            <th>
+            	<button pButton (click)="onReset()" label="Reset"></button>
+            </th>
+	        </tr>
+	    </ng-template>
+	    <ng-template pTemplate="body" let-rowData>
+	        <tr>
+	            <td> {{ rowData.id + '/' + rowData.date }} </td>
+	            <td> {{ rowData.inCharge.name }} </td>
+	            <td> {{ rowData.supplier.name }} </td>
+	            <td> 
+	            	<button pButton label="Voir" class="p-mr-2" [routerLink]="rowData.id"></button>
+								<button pButton label="Exporter" (click)="onExport(rowData)"></button>
+	            </td>
+	        </tr>
+	    </ng-template>
+		</p-table>
+	</div>
+</div>
