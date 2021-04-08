@@ -1,27 +1,43 @@
-# App
+Simple purchase order app developed with `Angular` - `Electron` And `Typeorm.`
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
+## Installation
 
-## Development server
+First install dependencies:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+npm install
+```
 
-## Code scaffolding
+Update the `Typeorm` configuration on the `main/config/database.ts` file.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* To serve locally renderer and main process: 
 
-## Build
+  ```bash
+  npm run ng:serve
+  ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+  and
 
-## Running unit tests
+  ```bash
+  npm run electron:serve
+  ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* To build the app
 
-## Running end-to-end tests
+  ```bash
+  npm run build
+  ```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+  It run `ng build` for the renderer process and `tsc` for the main process. You can the following command to see the result
 
-## Further help
+  ```bash
+  npm run electron
+  ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* The following command will build it with `electron-builder` for the chosen operating system
+
+  ```bash
+  npm run electron:linux
+  npm run electron:windows
+  npm run electron:mac
+  ```
