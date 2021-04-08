@@ -33,7 +33,6 @@ try {
                     event.sender.send('connect-database', true);
                 })
                 .catch((err)=>{
-                    throw err;
                     event.sender.send('connect-database', false);
                 })
         })

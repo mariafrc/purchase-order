@@ -17,6 +17,13 @@ export function inChargeController(){
 		);
 	})
 
+	ipcMain.on('request:get-with-deleted-incharges', async (event)=>{
+		event.sender.send(
+			'get-with-deleted-incharges', 
+			await inChargeRepository.find()
+		);
+	})
+
 	ipcMain.on('request:get-one-incharge', async (event, inChargeId: number)=>{
 		event.sender.send(
 			'get-one-incharge', 

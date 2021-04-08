@@ -1,6 +1,6 @@
 <div class="container p-pt-4 p-pb-3" *ngIf="orderForm">
 	<p-card>
-		<h2 align="center" class="p-m-0">{{ orderForm.id }}/{{ orderForm.date }}</h2>
+		<h2 align="center" class="p-m-0">BC N°: {{ orderForm.id }}_{{ orderForm.supplier.name }}({{ orderForm.date }})</h2>
 	</p-card>
 
 	<div class="p-m-2">

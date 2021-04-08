@@ -18,10 +18,11 @@ export function createWindow(win): BrowserWindow | null {
 
     if (serve) {
         win.loadURL('http://localhost:4200');
-        win.webContents.openDevTools();
+        //win.webContents.openDevTools();
     } else {
+
         win.loadURL(url.format({
-            pathname: path.resolve(__dirname, "../renderer/index.html"),
+            pathname: path.resolve(__dirname, "../../renderer/index.html"),
             protocol: "file:",
             slashes: true
         }));

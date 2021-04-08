@@ -23,6 +23,13 @@ export function supplierController(){
 		);
 	})
 
+	ipcMain.on('request:get-with-deleted-suppliers', async (event)=>{
+		event.sender.send(
+			'get-with-deleted-suppliers', 
+			await supplierRepository.find()
+		);
+	})
+
 	ipcMain.on('request:get-one-supplier', async (event, supplierId: number)=>{
 		event.sender.send(
 			'get-one-supplier', 

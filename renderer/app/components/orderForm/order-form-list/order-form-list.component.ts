@@ -38,8 +38,8 @@ export class OrderFormListComponent implements OnInit {
   	this.orderForms = await this.ipcService.execute('get-all-order-forms') as OrderForm[];
 
     const result = await Promise.all([
-      this.ipcService.execute('get-all-incharges'),
-      this.ipcService.execute('get-all-suppliers')
+      this.ipcService.execute('get-with-deleted-incharges'),
+      this.ipcService.execute('get-with-deleted-suppliers')
     ]);
 
     this.inCharges = result[0] as InCharge[];
@@ -121,13 +121,18 @@ export class OrderFormListComponent implements OnInit {
     doc.text("Votre Logo Ici", 155, 20);
     doc.text("Entreprise blabla", 150, 45);
 
-    doc.setFontSize(16);
-    doc.text(`Date: ${orderForm.id}/${orderForm.date}`, 85, 60);
+    doc.setFontSize(14);
+    doc.text(`BC N°: ${orderForm.id}_${orderForm.supplier.name}(${orderForm.date})`, 85, 60);
+    doc.text(`Date: ${orderForm.date}`, 85, 67);
 
     doc.text(`Fournisseur: ${orderForm.supplier.name}`, 15, 80);
+    doc.text(`Contact: ${orderForm.supplier.phone}`, 15, 87);
+
+    doc.text("Responsable e/se: RAKOTOBE J. C.", 105, 80);
+    doc.text("Téléphone: 033 65 231 12", 105, 87);
 
     autoTable(doc, {
-      margin: { top: 90 },
+      margin: { top: 95 },
       head: [['N°', 'Designation', 'Unité', 'PU (Ar)', 'Quantité', "Montant"]],
       body: this.articlesInTableFormat(orderForm.articles)
     })
@@ -151,7 +156,7 @@ export class OrderFormListComponent implements OnInit {
     doc.text("Le responsable", 110, 270);
     doc.text(orderForm.inCharge.name, 110, 275);
 
-    doc.save("bon_de_commande.pdf");
+    doc.save(`${orderForm.id}_${orderForm.supplier.name}(${orderForm.date}).pdf`);
     this.loading = false;
   }
 
